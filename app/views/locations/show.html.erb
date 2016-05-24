@@ -1,24 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Street address:</strong>
-  <%= @location.street_address %>
+<h1>Your Nearby Crazy Buses!</h1>
+
+<h3 class="text-muted">Your Current Location</h3>
+
+<p class="text-muted">
+  <%= @location.full_street_address %>
+  <small><%= link_to fa_icon('pencil', text: 'Edit'), edit_location_path(@location) %></small>
 </p>
 
-<p>
-  <strong>City:</strong>
-  <%= @location.city %>
-</p>
+<h3>The closest buses are...</h3>
+<% @buses.each do |bus| %>
+  <p>
+    <strong>Route:</strong> <%= bus["ROUTE"] %> <%= bus["DIRECTION"] %><br>
+    <strong>Bus Number:</strong> <%= bus["VEHICLE"] %><br>
+    <strong>Next Stop:</strong> <%= bus["TIMEPOINT"] %>
+  </p>
+<% end %>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @location.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @location.longitude %>
-</p>
+<% if @buses.empty? %>
+  <p>
+    Not really that close. :(  Time to walk, bike, taxi, Uber, or <%= link_to 'edit your location', edit_location_path(@location) %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_location_path(@location) %> |
 <%= link_to 'Back', locations_path %>

@@ -17,7 +17,7 @@
   </div>
   <div class="field form-group">
     <%= f.label :city %><br>
-    <%= f.text_field :city %>
+    <%= f.select :city, @cities %>
   </div>
   <div class="actions form-group">
     <%= f.submit "Find My Bus!" %>
